@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question writer</title>
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <!-- Modes -->
+     <section id="mode-container" class="flex_visible">
+
+            <label for="check-saq">
+                SAQ
+                <input type="radio" name="checkmode" id="check-saq" onclick="checkMode()" checked>
+            </label>
+            <label for="check-mcq">
+                MCQ
+                <input type="radio" name="checkmode" id="check-mcq" onclick="checkMode()">
+            </label>
+
+     </section>
+    <!-- Modes -->
+
+    <!-- saq Writing box -->
+
+    <section id="saq-writer-container" class="writer flex_hidden">
+        <input type="text" class="input_text" id="saq-input-field" placeholder="Type question here" autocomplete="off">                                                                                                                  
+        <button id="saq-push-btn" onclick="handleSaq()">Add</button>
+    </section>
+
+    <!-- saq Writing box -->
+    
+    <!-- mcq Writing box -->
+
+    <section id="mcq-writer-container" class="writer flex_hidden">
+        <input type="text" class="input_text" id="mcq-input-field" placeholder="Type question here" autocomplete="off" >                                                                                                                  
+        <input type="text" class="input_text" id="option-1" placeholder="Option A" autocomplete="off" >                                                                                                                  
+        <input type="text" class="input_text" id="option-2" placeholder="Option B" autocomplete="off" >                                                                                                                  
+        <input type="text" class="input_text" id="option-3" placeholder="Option C" autocomplete="off" >                                                                                                                  
+        <input type="text" class="input_text" id="option-4" placeholder="Option D" autocomplete="off" >                                                                                                                  
+        <button id="mcq-push-btn">Add</button>
+    </section>
+
+    <!-- mcq Writing box -->
+    
+
+    <!-- Post process options -->
+
+    <section id="post-process-container">
+        <button class="post_btn">Copy</button>
+        <button class="post_btn">Docs</button>
+        <button class="post_btn">Print</button>
+        <button class="post_btn">Export</button>
+    </section>
+
+    <!-- Post process options -->
+
+
+    <!-- Document preview -->
+
+    <div id="preview-container">
+        <div id="preview"></div>
+    </div>
+
+    <!-- Document preview -->
+
+
+   
+    <script src="./script.js"></script>
+</body>
+</html>
