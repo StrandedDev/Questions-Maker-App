@@ -4,7 +4,6 @@ const copyButton = document.getElementById('copy-btn');
 
 copyButton.addEventListener('click', () => {
 
-    // const preview = document.getElementById('preview');
     let textToCopy = preview.innerText;
 
     navigator.clipboard.writeText(textToCopy)
