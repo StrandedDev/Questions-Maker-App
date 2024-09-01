@@ -28,14 +28,14 @@ const allInputFields = document.querySelectorAll('.input_text');
 window.addEventListener('load', mainFunction);
 
 
+
 // count line number
 let currentSaqLineNumber = 1;
+let currentMcqLineNumber = 1;
 
 
 
-
-// Program star here
-
+// Program starts here
 function mainFunction(){    
     checkMode();
     clearAllFields();
@@ -43,11 +43,7 @@ function mainFunction(){
 
 
 
-
-
-
 // Functions
-
 
 function checkMode(){
 
@@ -57,6 +53,10 @@ function checkMode(){
         saq_container.classList.add('flex_visible');
         mcq_container.classList.remove('flex_visible');
         mcq_container.classList.add('flex_hidden');
+        // Clear fields
+        clearAllFields();
+        // Clear preview window
+        preview.innerHTML = '';
     } 
     
     if (mcq_checkbox.checked) {
@@ -65,12 +65,17 @@ function checkMode(){
         mcq_container.classList.add('flex_visible');
         saq_container.classList.remove('flex_visible');
         saq_container.classList.add('flex_hidden');
+        // Clear fields
+        clearAllFields();
+        // Clear preview window
+        preview.innerHTML = '';
     } 
 }
 
 
+// Clear all input fields
 function clearAllFields(){
-    console.log(allInputFields)
+
     allInputFields.forEach(element => {
         element.value = "";
     });
@@ -81,13 +86,18 @@ function clearAllFields(){
 
 
 // Handle saq
-
 function handleSaq(){
     let saqQuestion = saq_input_field.value;
 
-    preview.innerHTML += `<br> ${currentSaqLineNumber}. ${saqQuestion} -`;
-    currentSaqLineNumber++;
-    clearAllFields();
+    if(saqQuestion == '' || saqQuestion == null){
+        // make a notificaiton
+        createNotification('error', 'Please enter valid input')
+    }
+    else{
+        preview.innerHTML += `<br> ${currentSaqLineNumber}. ${saqQuestion} -`;
+        currentSaqLineNumber++;
+        clearAllFields();
+    }
 
 }
 
@@ -95,7 +105,7 @@ function handleSaq(){
 
 saq_input_field.addEventListener('keydown', function(e){
     if(e.key == "Enter"){
-        handleSaq()
+        handleSaq();
     }
 })
 
@@ -113,18 +123,40 @@ function handleMcq(){
         option_4: option_4_field.value
     }
 
-    preview.innerHTML += `<br> ${currentSaqLineNumber}. ${mcqQuestion.question} <br> ${mcqQuestion.option_1}`;
-    currentSaqLineNumber++;
+    // write to preview window
+    preview.innerHTML += `<pre>${currentMcqLineNumber}. ${mcqQuestion.question} <br>A. ${mcqQuestion.option_1}    B. ${mcqQuestion.option_2}    C. ${mcqQuestion.option_3}    D. ${mcqQuestion.option_4} </br>`;
+
+    currentMcqLineNumber++;
     clearAllFields();
 }
+
+
+// focus on next field
+
+mcq_input_field.addEventListener('keydown', (e) => {
+    if(e.key == 'Enter') { option_1_field.focus();}
+});
+
+option_1_field.addEventListener('keydown', (e) => {
+    if(e.key == 'Enter') { option_2_field.focus() }
+});
+
+option_2_field.addEventListener('keydown', (e) => {
+    if(e.key == 'Enter') { option_3_field.focus() }
+});
+
+option_3_field.addEventListener('keydown', (e) => {
+    if(e.key == 'Enter') { option_4_field.focus() }
+});
 
 
 // Push input value when enter is pressed
 
 option_4_field.addEventListener('keydown', function(e){
-    
     if(e.key == "Enter"){
-        handleMcq()
+        // mcq_push.click();
+        handleMcq();
+        mcq_input_field.focus();
     }
 })
 

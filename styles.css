@@ -8,6 +8,10 @@
     --dark-blue-border: #6a6aff;
     --light-blue-bg: #5858d3;
     --dark-blue-bg: #202097;
+
+    --primary-color: dodgerblue;
+    --success-color: #74ad5a;
+    --error-color: #db5b81;
 }
 
 body{
@@ -32,6 +36,9 @@ input, button{
     background-color: transparent;
 }
 
+pre{
+    margin: 0;
+}
 
 .flex_hidden{
     display: none;
@@ -142,7 +149,8 @@ input, button{
 /* Preview */
 
 #preview-container{
-    height: calc(100dvh - 40px);
+    height: 96vh;
+    width: 600px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -152,13 +160,77 @@ input, button{
 }
 
 #preview{
-    height: 11.7in;
-    width: 8.3in;
+    /* height: 11.7in;
+    width: 8.3in; */
+    height: 100%;
+    width: 100%;
     background-color: var(--full-white);
-    transform: scale(0.75);
     padding: 8px;
     box-shadow: 0 0 2px 0 #00000037;
+    font-size: 12px;
+}
+
+
+pre{
+    font-size: 12px;
+    font-family: sans-serif;
 }
 
 
 
+
+/* Toast */
+
+.toasts {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    bottom: 0;
+    right: 0;
+}
+
+.toast {
+    background-color: #fff;
+    border-radius: 5px;
+    margin: .5rem;
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    color: #929292;
+    font-size: 14px;
+    min-width: 500px;
+    box-shadow: 0px 2px 8px 0px rgba(99 99 99 / .2);
+    transform: translateX(150%);
+    animation: 4s ease-in-out slide-in;
+
+    border-left: 5px solid var(--theme);
+}
+
+.toast i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: var(--theme);
+}
+
+.toast span {
+    display: block;
+    font-weight: 800;
+    color: #000;
+}
+
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(150%);
+    }
+
+    10%,
+    90% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}

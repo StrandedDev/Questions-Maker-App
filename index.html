@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question writer</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -41,7 +42,7 @@
         <input type="text" class="input_text" id="option-2" placeholder="Option B" autocomplete="off" >                                                                                                                  
         <input type="text" class="input_text" id="option-3" placeholder="Option C" autocomplete="off" >                                                                                                                  
         <input type="text" class="input_text" id="option-4" placeholder="Option D" autocomplete="off" >                                                                                                                  
-        <button id="mcq-push-btn">Add</button>
+        <button id="mcq-push-btn" onclick="handleMcq()">Add</button>
     </section>
 
     <!-- mcq Writing box -->
@@ -50,7 +51,7 @@
     <!-- Post process options -->
 
     <section id="post-process-container">
-        <button class="post_btn">Copy</button>
+        <button class="post_btn" id="copy-btn">Copy</button>
         <button class="post_btn">Docs</button>
         <button class="post_btn">Print</button>
         <button class="post_btn">Export</button>
@@ -67,8 +68,16 @@
 
     <!-- Document preview -->
 
+    <!-- Toast alert -->
+
+    <div class="toasts" id="toasts">
+    </div>
+
+    <!-- Toast alert -->
 
    
-    <script src="./script.js"></script>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/notification.js"></script>
+    <script src="./scripts/features.js"></script>
 </body>
 </html>
