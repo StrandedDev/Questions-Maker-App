@@ -20,6 +20,9 @@ const option_2_field = document.getElementById('option-2');
 const option_3_field = document.getElementById('option-3');
 const option_4_field = document.getElementById('option-4');
 
+const mobile_options_container = document.getElementById('mobile-options-container');
+const toggle_mobile_options_btn = document.getElementById('toggle-mobile-options');
+
 const allInputFields = document.querySelectorAll('.input_text');
 
 
@@ -45,9 +48,11 @@ function mainFunction(){
 
 // Functions
 
-function checkMode(){
 
-    if (saq_checkbox.checked) {
+// Check writing mode
+function checkMode(mode){
+
+    if (saq_checkbox.checked || mode == 'saq') {
         // Show SAQ container and hide MCQ container
         saq_container.classList.remove('flex_hidden');
         saq_container.classList.add('flex_visible');
@@ -58,8 +63,8 @@ function checkMode(){
         // Clear preview window
         preview.innerHTML = '';
     } 
-    
-    if (mcq_checkbox.checked) {
+
+    if (mcq_checkbox.checked || mode == 'mcq') {
         // Show MCQ container and hide SAQ container
         mcq_container.classList.remove('flex_hidden');
         mcq_container.classList.add('flex_visible');
@@ -70,17 +75,21 @@ function checkMode(){
         // Clear preview window
         preview.innerHTML = '';
     } 
+
+    // reset line numbers when writing mode is changed
+    currentSaqLineNumber = 1; 
+    currentMcqLineNumber = 1;
+
 }
+
 
 
 // Clear all input fields
 function clearAllFields(){
-
     allInputFields.forEach(element => {
         element.value = "";
     });
 }
-
 
 
 
@@ -98,11 +107,11 @@ function handleSaq(){
         currentSaqLineNumber++;
         clearAllFields();
     }
-
 }
 
-// Push input value when enter is pressed
 
+
+// Push input value when enter is pressed
 saq_input_field.addEventListener('keydown', function(e){
     if(e.key == "Enter"){
         handleSaq();
@@ -113,7 +122,6 @@ saq_input_field.addEventListener('keydown', function(e){
 
 
 // Handle mcq
-
 function handleMcq(){
     let mcqQuestion = {
         question: mcq_input_field.value,
@@ -123,11 +131,39 @@ function handleMcq(){
         option_4: option_4_field.value
     }
 
-    // write to preview window
-    preview.innerHTML += `<pre>${currentMcqLineNumber}. ${mcqQuestion.question} <br>A. ${mcqQuestion.option_1}    B. ${mcqQuestion.option_2}    C. ${mcqQuestion.option_3}    D. ${mcqQuestion.option_4} </br>`;
+    if(currentMcqLineNumber == 30){
+        createNotification('info', 'Maximum mcq limit reached. Please refresh the page to add more');
+        return 0;
+    }
 
-    currentMcqLineNumber++;
-    clearAllFields();
+    if(mcqQuestion.question == '' || mcqQuestion.question == null){
+        // make a notificaiton
+        createNotification('error', 'Please enter valid input in question field')
+    }
+    else if(mcqQuestion.option_1 == '' || mcqQuestion.option_1 == null){
+        // make a notificaiton
+        createNotification('error', 'Please enter valid input')
+    }
+    else if(mcqQuestion.option_2 == '' || mcqQuestion.option_2 == null){
+        // make a notificaiton
+        createNotification('error', 'Please enter valid input')
+    }
+    else if(mcqQuestion.option_3 == '' || mcqQuestion.option_3 == null){
+        // make a notificaiton
+        createNotification('error', 'Please enter valid input')
+    }
+    else if(mcqQuestion.option_4 == '' || mcqQuestion.option_4 == null){
+        // make a notificaiton
+        createNotification('error', 'Please enter valid input')
+    }
+    else{
+        // write to preview window
+        preview.innerHTML += `<pre>${currentMcqLineNumber}. ${mcqQuestion.question} <br>A. ${mcqQuestion.option_1}    B. ${mcqQuestion.option_2}    C. ${mcqQuestion.option_3}    D. ${mcqQuestion.option_4} </br>`;
+        currentMcqLineNumber++;
+        clearAllFields();
+    }
+
+
 }
 
 
@@ -150,15 +186,34 @@ option_3_field.addEventListener('keydown', (e) => {
 });
 
 
-// Push input value when enter is pressed
 
+// Push input value when enter is pressed
 option_4_field.addEventListener('keydown', function(e){
     if(e.key == "Enter"){
-        // mcq_push.click();
         handleMcq();
         mcq_input_field.focus();
     }
 })
 
 
+
+
+
+// Handle mobile 
+
+// Toggle menu
+function toggleMobileMenu(){
+    if(mobile_options_container.classList.contains('flex_hidden')){
+        mobile_options_container.classList.remove('flex_hidden');
+        mobile_options_container.classList.add('flex_visible');
+    }
+    else if(mobile_options_container.classList.contains('flex_visible')){
+        mobile_options_container.classList.remove('flex_visible');
+        mobile_options_container.classList.add('flex_hidden');
+    }
+
+}
+
+// bind function to the button
+toggle_mobile_options_btn.addEventListener('click', toggleMobileMenu);
 

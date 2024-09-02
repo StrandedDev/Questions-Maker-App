@@ -15,11 +15,11 @@
 
             <label for="check-saq">
                 SAQ
-                <input type="radio" name="checkmode" id="check-saq" onclick="checkMode()" checked>
+                <input type="radio" name="checkmode" id="check-saq" onclick="checkMode('saq')" checked>
             </label>
             <label for="check-mcq">
                 MCQ
-                <input type="radio" name="checkmode" id="check-mcq" onclick="checkMode()">
+                <input type="radio" name="checkmode" id="check-mcq" onclick="checkMode('mcq')" >
             </label>
 
      </section>
@@ -60,11 +60,26 @@
     <!-- Post process options -->
 
 
+    <!-- Mobile options -->
+
+    <section id="mobile-options-container" class="flex_hidden">
+        <button class="mobile_btn" onclick="checkMode('saq')"><i class="fa-solid fa-plus"></i></button>
+        <button class="mobile_btn" onclick="checkMode('mcq')"><i class="fa-solid fa-list-check"></i></button>
+        <button class="mobile_btn"><i class="fa-regular fa-clipboard"></i></button>
+        <button class="mobile_btn"><i class="fa-brands fa-google-drive"></i></button>
+        <button class="mobile_btn"><i class="fa-solid fa-file-export"></i></button>
+    </section>
+
+    <!-- Mobile options -->
+
+
     <!-- Document preview -->
 
-    <div id="preview-container">
+    <!-- <div id="preview-container">
         <div id="preview"></div>
-    </div>
+    </div> -->
+
+    <div id="preview"></div>
 
     <!-- Document preview -->
 
@@ -74,6 +89,14 @@
     </div>
 
     <!-- Toast alert -->
+
+    <!-- Toggle ooptions on mobile -->
+
+    <button id="toggle-mobile-options">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Toggle ooptions on mobile -->
 
    
     <script src="./scripts/script.js"></script>
